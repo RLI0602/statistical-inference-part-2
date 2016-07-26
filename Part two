@@ -1,0 +1,27 @@
+Tooth Growth Data 
+Overview: For this project, I will load Tooth Growth Data in R and perform some basic exploratory data analyses. 
+Exploratory Data Analysis： 
+load the data
+library(datasets)
+data(ToothGrowth)
+summary(ToothGrowth)
+head(ToothGrowth)
+boxplot(len~supp, data=ToothGrowth, main="Boxplot of Tooth Length when grouped according to OJ/VC", ylab="Tooth Length")
+The bulk of tooth lengths are in the similar range when guinea pigs are given OJ or VC. But VC is more spread out in a wider range compared to OJ
+ToothGrowth$dose=as.factor(ToothGrowth$dose)
+boxplot(len~dose, data=ToothGrowth, main="Boxplot of Tooth Length when grouped according to doses", ylab="Tooth Length")
+When guinea pigs are treated to different dose, their tooth length varies distinctly. Those pigs that are given 2mg generally have longer teeth, followed by 1.0mg and 0.5mg.   
+Confidence Intervals and Hypothesis Test 
+Confidence T test of supp with the null hypothesis stating that there is no difference in Tooth Growth when using OJ or VC.
+t.test(len~supp, data=ToothGrowth)
+the p-value (0.06) is greater than 0.05 so we have insufficient evidence to reject the null hypothesis
+Confidence T test of dose with the null hypothesis stating that there is no difference in Tooth Growth when dose changes 
+t.test(len~dose, data=ToothGrowth[ToothGrowth$dose==0.5|ToothGrowth$dose==1.0,])
+p-value is smaller than 0.05 so we have sufficient evidence to reject the null hypothesis. 
+
+Assumptions 
+Data is assumed to be normally distributed and t tests we used given the relatively low sample size. Two groups supp and dose are assumed to be independent. 
+Base on the results of Confidence intervals above, I conclude that guinea pigs tooth length will bot be affected if given OJ or VC. However, their teeth will grow longer if the doses of these supps are heavier. 
+
+
+
